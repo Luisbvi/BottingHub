@@ -5,10 +5,10 @@ module.exports = {
     alias:['c'],
     permissions:["ADMINISTRATOR"],
     async execute (Discord, client, message){
-        const ticket = await Ticket.findOne({where: {channelId: message.channel.id}});
+        const ticket = await Ticket.findOne({channelId: message.channel.id});
         if(ticket){
             message.delete();
-            message.channel.updateOverwrite(ticket.getDataValue('authorId'), { 
+            message.channel.updateOverwrite(ticket.authorId, { 
                 SEND_MESSAGES: false 
             }).catch((error) => console.log(error));
             ticket.resolved = true;
@@ -21,9 +21,9 @@ module.exports = {
                 message.channel.delete();
             }, 86400000);
             console.log('Ticket closed');
-            const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
+            
             message.channel.edit({
-                name: `closed-${ticketId}`
+                name: 'ticket-closed'
             });
         }
     }

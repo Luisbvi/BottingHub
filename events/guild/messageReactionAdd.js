@@ -6,17 +6,18 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
     
     if(reaction.message.channel.id === '853452873445801984' && reaction.emoji.id === '853386714168819753'){
         reaction.users.remove(user);
-        const ticketConfig = await TicketConfig.findOne({where: {messageid: reaction.message.id}});
+        const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
-            const findTicket = await Ticket.findOne({where: {authorId: user.id, resolved: false}});
+            const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
             if(findTicket) user.send('You already have a ticket!');
             else{
                 try {
                     console.log('Creating ticket...');
-                    const roleIdString = ticketConfig.getDataValue('roles');
+                    const roleIdString = ticketConfig.roles;
+                    console.log(roleIdString);
                     const roleIds = JSON.parse(roleIdString);
                     const permissions = roleIds.map((id) => ({allow: 'VIEW_CHANNEL', id}));
-                    const channel = await reaction.message.guild.channels.create(user.username, {
+                    const channel = await reaction.message.guild.channels.create(`ticket-${user.username}`, {
                         permissionOverwrites: [
                             { deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
                             { allow: 'VIEW_CHANNEL', id: user.id },
@@ -32,15 +33,14 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                     .setFooter(`Ticket for ${user.tag}`)
                     );
 
-                    const ticket = await Ticket.create({
+                    const ticket = await new Ticket({
                         authorId: user.id,
                         channelId: channel.id,
                         guildId: reaction.message.guild.id,
                         resolved: false,
                     });
+                    ticket.save();
 
-                    const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
-                    await channel.edit({name: `${user.username}-${ticketId}`});
                 } catch (error) {
                     console.log(error);
                 }
@@ -51,17 +51,17 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
         }
     } else if(reaction.message.channel.id === '853452873445801984' && reaction.emoji.id === '853391747278962709'){
         reaction.users.remove(user);
-        const ticketConfig = await TicketConfig.findOne({where: {messageid: reaction.message.id}});
+        const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
-            const findTicket = await Ticket.findOne({where: {authorId: user.id, resolved: false}});
+            const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
             if(findTicket) user.send('You already have a ticket!');
             else{
                 try {
                     console.log('Creating ticket...');
-                    const roleIdString = ticketConfig.getDataValue('roles');
+                    const roleIdString = ticketConfig.roles;
                     const roleIds = JSON.parse(roleIdString);
                     const permissions = roleIds.map((id) => ({allow: 'VIEW_CHANNEL', id}));
-                    const channel = await reaction.message.guild.channels.create(user.username, {
+                    const channel = await reaction.message.guild.channels.create(`ticket-${user.username}`, {
                         permissionOverwrites: [
                             { deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
                             { allow: 'VIEW_CHANNEL', id: user.id },
@@ -83,9 +83,7 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                         guildId: reaction.message.guild.id,
                         resolved: false,
                     });
-
-                    const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
-                    channel.edit({name: `${user.username}-${ticketId}`});
+                    channel.edit({name: `ticket-closed`});
                 } catch (error) {
                     console.log(error);
                 }
@@ -96,17 +94,17 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
         }
     }else if(reaction.message.channel.id === '853452873445801984' && reaction.emoji.id === '853392355067035709'){
         reaction.users.remove(user);
-        const ticketConfig = await TicketConfig.findOne({where: {messageid: reaction.message.id}});
+        const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
-            const findTicket = await Ticket.findOne({where: {authorId: user.id, resolved: false}});
+            const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
             if(findTicket) user.send('You already have a ticket!');
             else{
                 try {
                     console.log('Creating ticket...');
-                    const roleIdString = ticketConfig.getDataValue('roles');
+                    const roleIdString = ticketConfig.roles;
                     const roleIds = JSON.parse(roleIdString);
                     const permissions = roleIds.map((id) => ({allow: 'VIEW_CHANNEL', id}));
-                    const channel = await reaction.message.guild.channels.create(user.username, {
+                    const channel = await reaction.message.guild.channels.create(`ticket-${user.username}`, {
                         permissionOverwrites: [
                             { deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
                             { allow: 'VIEW_CHANNEL', id: user.id },
@@ -128,9 +126,6 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                         guildId: reaction.message.guild.id,
                         resolved: false,
                     });
-
-                    const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
-                    await channel.edit({name: `${user.username}-${ticketId}`});
                 } catch (error) {
                     console.log(error);
                 }
@@ -140,17 +135,17 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
         }
     }else if(reaction.message.channel.id === '853452873445801984' && reaction.emoji.id === '853398763392466944'){
         reaction.users.remove(user);
-        const ticketConfig = await TicketConfig.findOne({where: {messageid: reaction.message.id}});
+        const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
-            const findTicket = await Ticket.findOne({where: {authorId: user.id, resolved: false}});
+            const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
             if(findTicket) user.send('You already have a ticket!');
             else{
                 try {
                     console.log('Creating ticket...');
-                    const roleIdString = ticketConfig.getDataValue('roles');
+                    const roleIdString = ticketConfig.roles;
                     const roleIds = JSON.parse(roleIdString);
                     const permissions = roleIds.map((id) => ({allow: 'VIEW_CHANNEL', id}));
-                    const channel = await reaction.message.guild.channels.create(user.username, {
+                    const channel = await reaction.message.guild.channels.create(`ticket-${user.username}`, {
                         permissionOverwrites: [
                             { deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
                             { allow: 'VIEW_CHANNEL', id: user.id },
@@ -173,8 +168,8 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                         resolved: false,
                     });
 
-                    const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
-                    await channel.edit({name: `${user.username}-${ticketId}`});
+                    
+                    await channel.edit({name: `ticket-closed`});
                 } catch (error) {
                     console.log(error);
                 }
@@ -184,17 +179,17 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
         }
     }else if(reaction.message.channel.id === '853452873445801984' && reaction.emoji.name === '⚒️'){
         reaction.users.remove(user);
-        const ticketConfig = await TicketConfig.findOne({where: {messageid: reaction.message.id}});
+        const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
-            const findTicket = await Ticket.findOne({where: {authorId: user.id, resolved: false}});
+            const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
             if(findTicket) user.send('You already have a ticket!');
             else{
                 try {
                     console.log('Creating ticket...');
-                    const roleIdString = ticketConfig.getDataValue('roles');
+                    const roleIdString = ticketConfig.roles;
                     const roleIds = JSON.parse(roleIdString);
                     const permissions = roleIds.map((id) => ({allow: 'VIEW_CHANNEL', id}));
-                    const channel = await reaction.message.guild.channels.create(user.username, {
+                    const channel = await reaction.message.guild.channels.create(`ticket-${user.username}`, {
                         permissionOverwrites: [
                             { deny: 'VIEW_CHANNEL', id: reaction.message.guild.id},
                             { allow: 'VIEW_CHANNEL', id: user.id },
@@ -216,9 +211,6 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                         guildId: reaction.message.guild.id,
                         resolved: false,
                     });
-
-                    const ticketId = String(ticket.getDataValue('ticketId')).padStart(4,0);
-                    await channel.edit({name: `${user.username}-${ticketId}`});
                 } catch (error) {
                     console.log(error);
                 }

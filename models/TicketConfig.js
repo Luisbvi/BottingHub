@@ -1,24 +1,11 @@
-const {DataTypes, Model} = require('sequelize');
+const {Schema, Model} = require('mongoose');
+const db = require('mongoose')
 
-module.exports = class TicketConfig extends Model{
-    static init(sequelize){
-        super.init({
-            messageId: {
-                type: DataTypes.STRING,
-                primaryKey: true
-            },
-            channelID: {
-                type: DataTypes.STRING
-            },
-            guildId: {
-                type: DataTypes.STRING
-            },
-            roles: {
-                type: DataTypes.STRING
-            },
-        },{
-            tableName: 'TicketConfigs',
-            sequelize
-        });
-    }
-}
+const TicketConfigs = new db.Schema({
+    messageId: String,
+    channelId: String,
+    guildId: String,
+    roles: Array
+});
+
+module.exports = db.model('TicketConfigs', TicketConfigs);

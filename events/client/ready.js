@@ -1,4 +1,4 @@
-const db = require('../../database');
+const db = require('mongoose');
 const Ticket = require('../../models/Ticket');
 const TicketConfig = require('../../models/TicketConfig');
 
@@ -23,14 +23,16 @@ module.exports =  (Discord, client) => {
         presence()
     },60000);
 
-    db.authenticate()
-    .then(()=>{
-        console.log('Connected to DB');
-        Ticket.init(db);
-        Ticket.sync();
-        TicketConfig.init(db);
-        TicketConfig.sync();
-    }).catch(err => console.log(err));
+    db.connect(process.env.MONGO, {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    }).then(() => {
+        console.log('connected to database');
+    }).catch((error) => {
+        console.log(error);
+    });
     
     console.log(' ');
     console.log(`${tiempo} ${client.user.tag} BOT iniciado con exito!`);

@@ -1,4 +1,4 @@
-const TicketConfig = require("../models/TicketConfig");
+const TicketConfigs = require("../models/TicketConfig");
 
 module.exports = {
     name: 'st',
@@ -48,12 +48,13 @@ module.exports = {
                 if(fetchMsg){
                     for(roleId of roles)
                     if(!message.guild.roles.cache.get(roleId))throw new Error ('Roles don\'t exist!')
-                    const ticketConfig = await TicketConfig.create({
+                    let sv = await new TicketConfigs({
                         messageId: embedId,
                         guildId: message.guild.id,
                         roles: JSON.stringify(roles),
                         channelID: message.channel.id
                     });
+                    await sv.save();
                     console.log('Saved Ticket Config to DB!');
 
                 } else throw new Error ('Invalid Fields!');

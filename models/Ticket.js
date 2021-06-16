@@ -1,28 +1,10 @@
-const {DataTypes, Model} = require('sequelize');
+const {Schema, Model} = require('mongoose');
+const db = require('mongoose')
+const Tickets = db.Schema({
+    channelId: String,
+    guildId: String,
+    resolved: Boolean,
+    authorId: String, 
+});
 
-module.exports = class Ticket extends Model{
-    static init(sequelize){
-        super.init({
-            ticketId: {
-                type: DataTypes.INTEGER,
-                autoIncrement: true,
-                primaryKey: true
-            },
-            channelId:{
-                type: DataTypes.STRING
-            },
-            guildId: {
-                type: DataTypes.STRING
-            },
-            resolved: {
-                type: DataTypes.BOOLEAN
-            },
-            authorId:{
-                type: DataTypes.STRING
-            }
-        },{
-            tableName: 'Tickets',
-            sequelize
-        });
-    }
-}
+module.exports = db.model('Tickets', Tickets)
