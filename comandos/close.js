@@ -19,7 +19,7 @@ module.exports = {
             ))
             setTimeout(() => {
                 message.channel.delete();
-            }, 86400000);
+            }, 5000);
             console.log('Ticket closed');
             
             message.channel.edit({
