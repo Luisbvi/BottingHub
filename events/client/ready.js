@@ -1,27 +1,13 @@
 const db = require('mongoose');
 const Ticket = require('../../models/Ticket');
 const TicketConfig = require('../../models/TicketConfig');
+const Status = require('../../models/Status');
 
-module.exports =  (Discord, client) => {
+module.exports = (Discord, client) => {
     var tiempo = new Date().toLocaleTimeString();
-
-    const estados = ['Proxies', 'Servers', 'Bots', 'Orders']
 
     console.log(``);
     console.log(`${tiempo} Iniciando BOT ${client.user.tag}...`);
-
-    setInterval(() =>{
-        function presence() {
-            client.user.setPresence({
-                status: 'dnd',
-                activity:{
-                    name: estados[Math.floor(Math.random()*estados.length)],
-                    type:'WATCHING'
-                }
-            });
-        }
-        presence()
-    },60000);
 
     db.connect(process.env.MONGO, {
         useCreateIndex: true,

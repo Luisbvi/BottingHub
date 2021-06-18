@@ -4,6 +4,7 @@ module.exports = {
     name: 'close',
     alias:['c'],
     permissions:["ADMINISTRATOR"],
+    
     async execute (Discord, client, message){
         const ticket = await Ticket.findOne({channelId: message.channel.id});
         if(ticket){

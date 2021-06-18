@@ -22,7 +22,7 @@ module.exports = {
         });
 
         setTimeout(() => {
-            message.delete()
+            message.channel.bulkDelete(1)
         }, 5000);
     }
 }
