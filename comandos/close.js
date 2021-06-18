@@ -17,15 +17,17 @@ module.exports = {
             .setColor('RED')
             .setTitle('This ticket has now been closed!')
             .setDescription(`Closed by <@${message.author.id}>\n\n**This channel will be auto deleted in 24 hours**`)
-            ))
-            setTimeout(() => {
-                message.channel.delete();
-            }, 5000);
-            console.log('Ticket closed');
-            
+            ));
+
             message.channel.edit({
                 name: 'ticket-closed'
             });
+            console.log('Ticket closed');
+
+            setTimeout(() => {
+                message.channel.delete();
+            }, 86400000);
+            console.log('Ticket deleted');
         }
     }
 }
