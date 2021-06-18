@@ -167,8 +167,6 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
                         resolved: false,
                     });
 
-                    
-                    await channel.edit({name: `ticket-closed`});
                 } catch (error) {
                     console.log(error);
                 }
