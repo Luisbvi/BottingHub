@@ -10,7 +10,7 @@ module.exports = {
         let channel = message.mentions.channels.first();
         if(!channel) return console.log('mention a channel pls');
 
-        let giveawayDuration = parseInt(args[1]) * 60000
+        let giveawayDuration = args[1] 
         if(!giveawayDuration || isNaN(giveawayDuration)) return message.reply('pls enter a valid duration');
 
         let giveawayWinners = parseInt(args[2])
