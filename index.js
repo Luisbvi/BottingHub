@@ -1,10 +1,23 @@
 const Discord = require('discord.js');
-const db = require('mongoose')
 require('dotenv').config();
+const {GiveawaysManager} = require('discord-giveaways');
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
+const config = require('./config.json')
+client.config = config;
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
+
+client.giveawaysManager = new GiveawaysManager(client, {
+    storage: './giveaways.json',
+    updateCountdownEvery: 1000,
+    default: {
+        botsCanWin: false,
+        exemptPermissions: [],
+        embedColor: '#3CFFFB',
+        reaction: '🎉'
+    }
+});
 
 
 ['command_handler', 'event_handler'].forEach(handler =>{

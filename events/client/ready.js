@@ -4,10 +4,8 @@ const TicketConfig = require('../../models/TicketConfig');
 const Status = require('../../models/Status');
 
 module.exports = (Discord, client) => {
-    var tiempo = new Date().toLocaleTimeString();
-
     console.log(``);
-    console.log(`${tiempo} Iniciando BOT ${client.user.tag}...`);
+    console.log(`Iniciando BOT ${client.user.tag}...`);
 
     db.connect(process.env.MONGO, {
         useCreateIndex: true,
@@ -21,6 +19,6 @@ module.exports = (Discord, client) => {
     });
     
     console.log(' ');
-    console.log(`${tiempo} ${client.user.tag} BOT iniciado con exito!`);
+    console.log(`${client.user.tag} BOT iniciado con exito!`);
     console.log(' ');
 }
