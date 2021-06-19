@@ -3,7 +3,7 @@ module.exports = {
     alias:['roll'],
     permissions:['ADMINISTRATOR'],
 
-    execute(Discord,client,args){
+    execute(Discord,client,message,args){
         const messageId = args[0]
         client.giveawaysManager.reroll(messageId).then(() =>{
             message.channel.send('Success! Giveaway rerolled!');
