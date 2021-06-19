@@ -6,7 +6,7 @@ module.exports = {
     alias: ["gStart"],
     permissions: [],
 
-    async execute(Discord, client, message,args, reactions){
+    async execute(Discord, client, message,args){
         let channel = message.mentions.channels.first();
         if(!channel) return console.log('mention a channel pls');
 
@@ -24,6 +24,7 @@ module.exports = {
             prize: giveawayPrize,
             winnerCount: giveawayWinners,
             hostedBy: client.config.hostedBy ? message.author : null,
+            reaction: '🎉',
             messages: {
                 giveaway: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway",
                 giveawayEnd: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway Ended",

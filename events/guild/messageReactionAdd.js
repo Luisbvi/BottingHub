@@ -380,5 +380,4 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
             console.log('No ticket config found!');
         }
     }
-    if(reaction.emoji)return reaction.users.remove(user);
 }
