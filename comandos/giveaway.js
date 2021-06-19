@@ -6,7 +6,7 @@ module.exports = {
     alias: ["gStart"],
     permissions: [],
 
-    async execute(Discord, client, message,args){
+    async execute(Discord, client, message,args, reactions){
         let channel = message.mentions.channels.first();
         if(!channel) return console.log('mention a channel pls');
 
