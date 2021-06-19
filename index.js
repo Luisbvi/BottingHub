@@ -10,7 +10,7 @@ client.events = new Discord.Collection();
 
 client.giveawaysManager = new GiveawaysManager(client, {
     storage: './giveaways.json',
-    updateCountdownEvery: 1000,
+    updateCountdownEvery: 10000,
     default: {
         botsCanWin: false,
         exemptPermissions: [],
