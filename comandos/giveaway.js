@@ -26,7 +26,6 @@ module.exports = {
             hostedBy: client.config.hostedBy ? message.author : null,
             reaction: '🎉',
             messages: {
-                giveaway: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway",
                 giveawayEnd: (client.config.everyoneMention ? "@everyone\n\n" : '') + "Giveaway Ended",
                 timeRemaining: "Time Remaining **{duration}**",
                 inviteToParticipate: "React with 🎉 to join the giveaway",
