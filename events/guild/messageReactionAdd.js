@@ -379,8 +379,11 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
          }else{
             console.log('No ticket config found!');
         }
-    }else if(reaction.message.channel.id === '855183196928999464' && reaction.emoji.name === '🥇' && reaction.user.roles.has(reaction.guild.roles.find('VIP'))){
+    }else if(reaction.message.channel.id === '855183196928999464' && reaction.emoji.name === '🥇' ) {
         reaction.users.remove(user);
+        let rol = reaction.message.guild.roles.cache.get("855140978805571614");
+        let memberr = reaction.message.guild.members.cache.get(user.id)
+        if (!memberr.roles.cache.has(rol.id)) return console.log('You don\'t have VIP role');
         const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
             const findTicket = await Ticket.findOne({authorId: user.id, resolved: false});
