@@ -297,7 +297,7 @@ module.exports = async (message,messageReactionAdd, reaction,user) => {
          }else{
             console.log('No ticket config found!');
         }
-    } else if(reaction.message.channel.id === '855183196928999464' && reaction.emoji.name === '⚙️'){
+    } else if(reaction.message.channel.id === '855183196928999464' && reaction.emoji.name === '🌐'){
         reaction.users.remove(user);
         const ticketConfig = await TicketConfig.findOne({messageId: reaction.message.id});
         if(ticketConfig){
