@@ -21,7 +21,6 @@ module.exports = {
             .addField('Buy Gold', 'React with <:coins_icon:853392355067035709> to buy gold')
             .addField('Buy accounts','React with <:BTC:853398763392466944> to buy an account')
             .addField('Custom Services','React with ⚒️ for any Custom Services / Bulk accounts')
-            .addField('If you need help in your botting journey, react with 🥇, **VIP Role required**')
             .addField('All quotes / trades  are done via Tickets only', `We don't Quote / Collect any Money outside the Scope of tickets, all confirmation are done via tickets only\n\nAdditional fees may apply for ironman or hardcore ironman services. By opening a ticket, you agree with our <#762927028395048961>`)
             .setColor('RED')
             .setFooter(`Powered By BottingHub.com`)
@@ -40,8 +39,6 @@ module.exports = {
                 console.log(`${tiempo} Otros servicios`);
                 await embed.react('⚒️');
                 console.log(`${tiempo} Setup ID: ${embed.id}`);
-                await embed.react('🥇');
-                console.log('VIP Role');
                 message.delete();
 
                 console.log('Getting embed id');

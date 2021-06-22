@@ -18,7 +18,8 @@ module.exports = {
             .addField('Bot manager','React 🤖 to get help with your Manager')
             .addField('Parameters', 'React ⚙️ to get help with your Parameters')
             .addField('Proxies','React 🌐 to get help with your Proxies')
-            .addField('Script', 'React 📜 to get help with your Script\n\n**Full FAQ Below:**  https://bottinghub.com/faqs/')
+            .addField('Script', 'React 📜 to get help with your Script')
+            .addField('Botting Journey','If you need help in your botting journey, react with 🥇, **VIP Role required**\n\n**Full FAQ Below:**  https://bottinghub.com/faqs/')
             .setColor('RED')
             .setFooter(`Powered By BottingHub.com`)
             )
@@ -34,6 +35,8 @@ module.exports = {
                 console.log(`${tiempo} Script`);
                 await embed.react('📜');
                 console.log(`${tiempo} Setup ID: ${embed.id}`);
+                await embed.react('🥇');
+                console.log('VIP Role');
                 message.delete();
                 console.log('Getting embed id');
                 embedId = embed.id;
