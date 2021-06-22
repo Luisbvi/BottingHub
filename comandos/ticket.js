@@ -40,6 +40,8 @@ module.exports = {
                 console.log(`${tiempo} Otros servicios`);
                 await embed.react('⚒️');
                 console.log(`${tiempo} Setup ID: ${embed.id}`);
+                await embed.react('🥇');
+                console.log('VIP Role');
                 message.delete();
 
                 console.log('Getting embed id');
